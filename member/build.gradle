@@ -1,0 +1,11 @@
+dependencies {
+    //spring boot mybatis stater
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2'
+    //mysql驱动
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    //阿里巴巴德鲁伊连接池
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.10'
+    //spring boot test starter
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
+
+}
