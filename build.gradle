@@ -1,0 +1,38 @@
+//配置maven仓库
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+//所有子项目设置
+allprojects {
+    group "com.tsco"
+    version "1.0.0"
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    // 全局配置
+    configurations {
+        all*.exclude group: 'log4j'             // 排除log4j依赖
+    }
+    //全局依赖
+    dependencies {
+        compile 'org.projectlombok:lombok:1.16.20'   //lombok插件
+        testCompile("junit:junit:4.12")
+    }
+}
