@@ -1,4 +1,5 @@
 rootProject.name = 'AnswerSystem'
 include 'web'
 include 'member'
+include 'common'
 
