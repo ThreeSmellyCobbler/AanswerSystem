@@ -9,5 +9,4 @@ public enum SexEnum {
     }
 
     private String desc;
-
 }

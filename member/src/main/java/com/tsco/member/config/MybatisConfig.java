@@ -4,6 +4,7 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -49,9 +50,12 @@ public class MybatisConfig {
             sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mappers/*-mapper.xml"));
             //设置po路径
             sqlSessionFactoryBean.setTypeAliasesPackage("com.tsco.member.domain.po");
+            sqlSessionFactoryBean.setVfs(SpringBootVFS.class);
+            //开启mybatis的驼峰功能
+            sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
             return sqlSessionFactoryBean.getObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("===============出现异常了================");
             return null;
         }
     }
