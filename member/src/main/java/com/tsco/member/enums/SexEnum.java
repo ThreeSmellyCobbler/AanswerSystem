@@ -1,10 +1,10 @@
 package com.tsco.member.enums;
 
-public enum SEX {
+public enum SexEnum {
     MALE("男"),
     FEMALE("女");
 
-    SEX(String desc) {
+    SexEnum(String desc) {
         this.desc = desc;
     }
 
