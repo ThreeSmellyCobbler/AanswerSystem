@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class User {
     //用户id
-    private Integer id;
+    private Long id;
     //用户姓名
     private String userName;
     //邮箱
