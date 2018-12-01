@@ -1,8 +1,14 @@
 dependencies {
     //spring boot web starter
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE'
-    // 测试用例:spring-test支持
+
+    //spring boot dubbo starter
+    compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
+
+    // 测试用例:spring boot test支持
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
+
+    compile project(':api')
 
 }
 

@@ -5,7 +5,12 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
     //阿里巴巴德鲁伊连接池
     compile 'com.alibaba:druid-spring-boot-starter:1.1.10'
+    //spring boot dubbo starter
+    compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
     //spring boot test starter
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
 
+    compile project(':api')
+
 }
+
