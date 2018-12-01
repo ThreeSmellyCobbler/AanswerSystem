@@ -19,7 +19,12 @@ public class UserMapperTest {
 
     @Test
     public void contextTest() {
-        System.out.println(userMapper.load(2L));
+
+    }
+
+    @Test
+    public void testLoad() {
+        userMapper.load(1L);
     }
 
     @Test
@@ -49,6 +54,11 @@ public class UserMapperTest {
                 .sex("4")
                 .build();
         System.out.println(userMapper.update(user));
+    }
+
+    @Test
+    public void testFindByEmail() {
+        userMapper.findByEmail("123qq@qq.com");
     }
 
 }

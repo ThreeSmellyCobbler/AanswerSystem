@@ -5,7 +5,8 @@
 *.log
 .idea
 gradle/wrapper
-
+member/out
+web/out
 # BlueJ files
 *.ctxt
 

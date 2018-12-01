@@ -9,6 +9,8 @@ dependencies {
     compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
     //spring boot test starter
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
+    // dozer 工具包
+    compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
 
     compile project(':api')
 
