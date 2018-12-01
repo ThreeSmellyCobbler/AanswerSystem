@@ -1,0 +1,13 @@
+package com.tsco.web.exception;
+
+/**
+ * @author chen jia
+ * <p>
+ * 异常码
+ */
+public class ExceptionCode {
+
+    public static final String INNER_ERROR = "1000";
+
+    public static final String INVALID_PARAMETER = "10001";
+}
