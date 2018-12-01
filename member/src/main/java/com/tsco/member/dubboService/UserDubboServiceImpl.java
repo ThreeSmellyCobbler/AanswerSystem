@@ -1,5 +1,6 @@
 package com.tsco.member.dubboService;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.tsco.api.domain.UserDTO;
 import com.tsco.api.dubboService.UserDubboService;
 import com.tsco.member.domain.po.User;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
+@Service(version = "1.0.0")
 public class UserDubboServiceImpl implements UserDubboService {
 
     @Autowired
