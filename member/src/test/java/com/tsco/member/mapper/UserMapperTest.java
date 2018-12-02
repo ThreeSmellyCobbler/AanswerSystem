@@ -22,6 +22,7 @@ public class UserMapperTest {
 
     }
 
+
     @Test
     public void testLoad() {
         userMapper.load(1L);
