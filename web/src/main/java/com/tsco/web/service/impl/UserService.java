@@ -16,8 +16,7 @@ public class UserService {
     private UserDubboService userDubboService;
 
     public Optional<UserDTO> creatUser(UserDTO userDTO) {
-        userDubboService.createUser(userDTO);
-        return Optional.empty();
+        return userDubboService.createUser(userDTO);
     }
 
     public UserDTO login(LoginForm loginForm) {
