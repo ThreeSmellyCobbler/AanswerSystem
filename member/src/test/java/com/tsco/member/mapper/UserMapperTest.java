@@ -19,6 +19,9 @@ public class UserMapperTest {
 
     @Test
     public void contextTest() {
+        System.out.println("+++++++++++++++++");
+        System.out.println(userMapper);
+        System.out.println("====================");
 
     }
 
