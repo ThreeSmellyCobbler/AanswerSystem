@@ -3,9 +3,11 @@ package com.tsco.member.service;
 import com.tsco.member.domain.po.User;
 import com.tsco.member.mapper.user.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     @Autowired
