@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource(value = "classpath:datasource.properties")
+@PropertySource(value = "classpath:dataSource.properties")
 public class MybatisConfig {
 
     @Value("${spring.mysql.datasource.url}")
