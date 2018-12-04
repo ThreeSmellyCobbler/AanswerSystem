@@ -8,6 +8,7 @@ import com.tsco.web.exception.WebException;
 import com.tsco.web.service.impl.UserService;
 import com.tsco.web.utils.Constans;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Response login(LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
+    public Response login(@RequestBody LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
         if (loginForm.getEmail() == null || loginForm.getPassword() == null) {
             new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");
         }
