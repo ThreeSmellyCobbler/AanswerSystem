@@ -25,13 +25,11 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Response register(@RequestBody RegisterForm registerForm) {
-        System.out.println(registerForm.getEmail());
-        System.out.println(registerForm.getPassword());
         if (registerForm.getEmail() == null || registerForm.getPassword() == null) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");
         }
         //校验email
-        if (registerForm.getEmail().matches(PatternRegex.email)) {
+        if (!registerForm.getEmail().matches(PatternRegex.email)) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱格式不正确");
         }
         Optional<UserDTO> optionalUserDTO = userService.creatUser(userService.generateUserDTO(registerForm));
@@ -41,7 +39,4 @@ public class RegisterController {
         return Response.FAIL(ExceptionCode.INNER_ERROR, "创建用户异常");
     }
 
-    public static void main(String[] args) {
-        System.out.println("2496243148@qq.com".matches(PatternRegex.email));
-    }
 }
