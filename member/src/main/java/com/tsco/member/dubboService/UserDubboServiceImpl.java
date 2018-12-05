@@ -20,13 +20,13 @@ public class UserDubboServiceImpl implements UserDubboService {
     private DozerBeanMapper dozerBeanMapper;
 
     @Override
-    public Optional<UserDTO> createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) {
         User user = dozerBeanMapper.map(userDTO, User.class);
         if (!userService.saveUser(user)) {
             throw new RuntimeException("保存对象失败");
         }
         userDTO.setId(user.getId());
-        return Optional.ofNullable(userDTO);
+        return userDTO;
     }
 
     @Override

@@ -7,16 +7,15 @@ import com.tsco.web.domain.vo.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserService {
 
     @Autowired
     private UserDubboService userDubboService;
 
-    public Optional<UserDTO> creatUser(UserDTO userDTO) {
-        return userDubboService.createUser(userDTO);
+    public UserDTO creatUser(UserDTO userDTO) {
+        UserDTO user = userDubboService.createUser(userDTO);
+        return user.getId() == null ? null : user;
     }
 
     public UserDTO login(LoginForm loginForm) {

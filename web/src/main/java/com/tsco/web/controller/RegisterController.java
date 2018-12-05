@@ -32,8 +32,8 @@ public class RegisterController {
         if (!registerForm.getEmail().matches(PatternRegex.email)) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱格式不正确");
         }
-        Optional<UserDTO> optionalUserDTO = userService.creatUser(userService.generateUserDTO(registerForm));
-        if (optionalUserDTO.isPresent()) {
+        UserDTO userDTO = userService.creatUser(userService.generateUserDTO(registerForm));
+        if (userDTO != null) {
             return Response.SUCCESS();
         }
         return Response.FAIL(ExceptionCode.INNER_ERROR, "创建用户异常");
