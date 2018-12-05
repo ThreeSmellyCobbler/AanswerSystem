@@ -28,7 +28,7 @@ public class UserService {
 
     public UserDTO generateUserDTO(RegisterForm registerForm) {
         return UserDTO.builder()
-                .userRole(registerForm.getEmail())
+                .email(registerForm.getEmail())
                 .password(registerForm.getPassword())
                 .build();
 
@@ -36,7 +36,7 @@ public class UserService {
 
     public UserDTO generateUserDTO(LoginForm loginForm) {
         return UserDTO.builder()
-                .userRole(loginForm.getEmail())
+                .email(loginForm.getEmail())
                 .password(loginForm.getPassword())
                 .build();
 
