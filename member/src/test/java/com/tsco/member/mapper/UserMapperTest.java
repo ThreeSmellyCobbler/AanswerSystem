@@ -40,7 +40,7 @@ public class UserMapperTest {
                 .email("1")
                 .birthday(new Date())
                 .password("1")
-                .sex("1")
+                .gender("1")
                 .build();
         System.out.println(userMapper.persit(user));
     }
@@ -55,7 +55,7 @@ public class UserMapperTest {
                 .email("2")
                 .birthday(new Date())
                 .password("3")
-                .sex("4")
+                .gender("4")
                 .build();
         System.out.println(userMapper.update(user));
     }

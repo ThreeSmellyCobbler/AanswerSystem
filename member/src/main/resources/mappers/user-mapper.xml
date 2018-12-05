@@ -27,7 +27,7 @@
             <if test="password != null">
                 PASSWORD,
             </if>
-            <if test="sex != null">
+            <if test="gender != null">
                 SEX,
             </if>
             <if test="birthday != null">
@@ -59,8 +59,8 @@
             <if test="password!=null">
                 #{password},
             </if>
-            <if test="sex!=null">
-                #{sex},
+            <if test="gender!=null">
+                #{gender},
             </if>
             <if test="birthday">
                 #{birthday},
@@ -92,8 +92,8 @@
             <if test="password != null">
                 PASSWORD = #{password},
             </if>
-            <if test="sex !=null">
-                SEX = #{sex},
+            <if test="gender !=null">
+                SEX = #{gender},
             </if>
             <if test="birthday != null">
                 BIRTHDAY = #{birthday},

@@ -21,7 +21,7 @@ public class User {
     //登录密码
     private String password;
     //性别
-    private String sex;
+    private String gender;
     //生日
     private Date birthday;
     //地址
