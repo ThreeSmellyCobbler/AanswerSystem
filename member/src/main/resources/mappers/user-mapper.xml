@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tsco.member.mapper.user.UserMapper">
     <sql id="Base_Column_List">
-        ID,USER_NAME,EMAIL,PASSWORD,SEX,BIRTHDAY,ADDRESS,USER_ROLE,CREATED_AT,UPDATED_AT
+        ID,USER_NAME,EMAIL,PASSWORD,GENDER,BIRTHDAY,ADDRESS,USER_ROLE,CREATED_AT,UPDATED_AT
     </sql>
 
     <select id="load" parameterType="java.lang.Long" resultType="com.tsco.member.domain.po.User">
@@ -28,7 +28,7 @@
                 PASSWORD,
             </if>
             <if test="gender != null">
-                SEX,
+                GENDER,
             </if>
             <if test="birthday != null">
                 BIRTHDAY,
@@ -93,7 +93,7 @@
                 PASSWORD = #{password},
             </if>
             <if test="gender !=null">
-                SEX = #{gender},
+                GENDER = #{gender},
             </if>
             <if test="birthday != null">
                 BIRTHDAY = #{birthday},
