@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
-//@Configuration
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -26,7 +26,9 @@ public class WebConfig implements WebMvcConfigurer {
                 //拦截所有请求
                 .addPathPatterns("/**")
                 //排除登录、注册
-                .excludePathPatterns(Arrays.asList("/login", "/register","/swagger-ui.html"));
+                .excludePathPatterns(Arrays.asList("/login", "/register"))
+                //排除swagger
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
 
     /**
@@ -37,9 +39,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
+        /*registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");*/
     }
 }
