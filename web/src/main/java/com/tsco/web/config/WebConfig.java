@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
                 //拦截所有请求
                 .addPathPatterns("/**")
                 //排除登录、注册
-                .excludePathPatterns(Arrays.asList("/login", "/register"));
+                .excludePathPatterns(Arrays.asList("/login", "/register","/swagger-ui.html"));
     }
 
     /**
