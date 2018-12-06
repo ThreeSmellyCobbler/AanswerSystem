@@ -7,10 +7,6 @@ dependencies {
     //spring boot dubbo starter
     compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
 
-    //swagger
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-
     // 测试用例:spring boot test支持
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
 
