@@ -7,6 +7,10 @@ import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
 import com.tsco.web.service.impl.UserService;
 import com.tsco.web.utils.Constans;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Api(description = "登录相关接口", tags = "login")
 @RequestMapping("/login")
 @RestController
 public class LoginController {
@@ -23,6 +28,11 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "用户登录", notes = "login")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String"),
+            @ApiImplicitParam(name = "password", value = "密码", paramType = "String")
+    })
     @RequestMapping(method = RequestMethod.POST)
     public Response login(@RequestBody LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
         if (loginForm.getEmail() == null || loginForm.getPassword() == null) {
