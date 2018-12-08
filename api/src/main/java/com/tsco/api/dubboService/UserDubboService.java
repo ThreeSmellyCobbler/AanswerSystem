@@ -7,6 +7,6 @@ public interface UserDubboService {
     //创建用户
     UserDTO createUser(UserDTO userDTO);
 
-    UserDTO login(UserDTO userDTO);
+    UserDTO findUserByEmail(UserDTO userDTO);
 
 }

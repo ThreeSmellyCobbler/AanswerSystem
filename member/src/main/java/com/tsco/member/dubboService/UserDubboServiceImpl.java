@@ -34,12 +34,12 @@ public class UserDubboServiceImpl implements UserDubboService {
     }
 
     @Override
-    public UserDTO login(UserDTO userDTO) {
+    public UserDTO findUserByEmail(UserDTO userDTO) {
         Optional<User> userOptional = userService.findUserByEmail(userDTO.getEmail());
         if (userOptional.isPresent()) {
             return dozerBeanMapper.map(userOptional.get(), userDTO.getClass());
         }
-        log.info("user login fail,userId is: {]", userDTO.getId());
+        log.info("user login fail,login email is: {}", userDTO.getEmail());
         return null;
     }
 }

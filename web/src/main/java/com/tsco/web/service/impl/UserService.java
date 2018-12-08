@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public UserDTO login(LoginForm loginForm) {
-        UserDTO userDTO = userDubboService.login(generateUserDTO(loginForm));
+        UserDTO userDTO = userDubboService.findUserByEmail(generateUserDTO(loginForm));
         return userDTO == null ? null :
                 (userDTO.getPassword().equals(loginForm.getPassword()) ? userDTO : null);
 
