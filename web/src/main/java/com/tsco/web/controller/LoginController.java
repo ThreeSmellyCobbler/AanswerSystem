@@ -43,7 +43,7 @@ public class LoginController {
         }
         UserDTO userDTO = userService.login(loginForm);
         if (userDTO == null) {
-            return Response.FAIL(ExceptionCode.INVALID_PARAMETER, "手机号或验证码不正确");
+            return Response.FAIL(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不正确");
         }
         request.getSession().setAttribute(Constans.USER_ID, userDTO.getId());
         return Response.SUCCESS();
