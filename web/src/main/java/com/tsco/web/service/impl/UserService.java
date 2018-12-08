@@ -4,10 +4,12 @@ import com.tsco.api.domain.UserDTO;
 import com.tsco.api.dubboService.UserDubboService;
 import com.tsco.web.domain.vo.LoginForm;
 import com.tsco.web.domain.vo.RegisterForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired

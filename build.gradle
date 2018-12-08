@@ -29,7 +29,12 @@ subprojects {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
-//    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    configurations{
+        all*.exclude module: 'commons-logging'  // 排除commons-logging依赖
+        all*.exclude module: 'slf4j-log4j12'
+        all*.exclude group: 'log4j'             // 排除log4j依赖
+    }
 
     //全局依赖
     dependencies {
