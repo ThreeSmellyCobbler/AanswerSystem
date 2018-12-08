@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Api(description = "登录相关接口", tags = "login")
 @RequestMapping("/login")
 @RestController
@@ -35,6 +37,7 @@ public class LoginController {
     })
     @RequestMapping(method = RequestMethod.POST)
     public Response login(@RequestBody LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
+        log.info("user login begin,email is: {},password is: {}", loginForm.getEmail(), loginForm.getPassword());
         if (loginForm.getEmail() == null || loginForm.getPassword() == null) {
             new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");
         }
