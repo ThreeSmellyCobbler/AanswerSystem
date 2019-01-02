@@ -4,6 +4,7 @@
 # Log file
 *.log
 .idea
+AnswerSystem.iml
 gradle/wrapper
 member/out
 web/out
