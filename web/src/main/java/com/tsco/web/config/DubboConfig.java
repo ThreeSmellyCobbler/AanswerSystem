@@ -1,6 +1,7 @@
 package com.tsco.web.config;
 
 import com.alibaba.dubbo.config.spring.ReferenceBean;
+import com.tsco.api.dubboService.MailSenderDubboService;
 import com.tsco.api.dubboService.UserDubboService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,5 +23,15 @@ public class DubboConfig {
         referenceBean.setVersion(VERSION);
         return referenceBean;
     }
+
+    @Bean
+    public ReferenceBean<MailSenderDubboService> mailSenderDubboService() {
+        ReferenceBean<MailSenderDubboService> referenceBean = new ReferenceBean<>();
+        referenceBean.setInterface(MailSenderDubboService.class);
+        referenceBean.setVersion(VERSION);
+        return referenceBean;
+    }
+
+
 }
 
