@@ -1,0 +1,11 @@
+dubbo:
+    scan:
+        base-packages: com.tsco.common.dubboService
+    application:
+        name: common
+    protocol:
+        name: dubbo
+        port: 20881
+    registry:
+        address: zookeeper://101.132.143.173:2181
+        check: true

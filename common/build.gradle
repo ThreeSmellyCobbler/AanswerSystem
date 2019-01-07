@@ -1,2 +1,17 @@
+apply plugin: 'org.springframework.boot'
+
+
 dependencies {
+
+    compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.1.RELEASE'
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.1.RELEASE'
+
+    compile project(':api')
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
+
 }
+
+

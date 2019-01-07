@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>注册验证码</title>
+    <head/>
+<body>
+<p>
+<span>尊敬的用户，您的注册验证码为</span>
+<span th:text="${verificationCode}"></span>
+<span>。有效期1分钟，请您尽快注册!</span>
+</body>
+<p/>
+</html>
