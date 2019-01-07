@@ -1,25 +1,30 @@
 package com.tsco.member.service;
 
 import com.tsco.member.domain.po.User;
-import com.tsco.member.mapper.user.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
-public class UserService {
+/**
+ * 2019/01/04 17:19
+ *
+ * @author <a href="tony_stonner@163.com">fo</a>
+ * @record:
+ */
+public interface UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    /**
+     * 创建用户
+     *
+     * @param user
+     * @return 保存状态
+     */
+    boolean saveUser(User user);
 
-    public boolean saveUser(User user) {
-        int persit = userMapper.persit(user);
-        return persit == 1;
-    }
-
-    public Optional<User> findUserByEmail(String email) {
-        User user = userMapper.findByEmail(email);
-        return Optional.ofNullable(user);
-    }
+    /**
+     * 通过用户email查找用户
+     *
+     * @param email
+     * @return 用户实体
+     */
+    Optional<User> findUserByEmail(String email);
 }
