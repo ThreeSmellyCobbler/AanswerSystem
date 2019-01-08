@@ -4,6 +4,7 @@ import com.tsco.api.domain.UserDTO;
 import com.tsco.api.domain.dto.MailSenderDTO;
 import com.tsco.api.domain.enums.EmailTemplateEnum;
 import com.tsco.api.domain.enums.TemplateParam;
+import com.tsco.api.domain.exception.ASException;
 import com.tsco.api.dubboService.MailSenderDubboService;
 import com.tsco.api.utils.RandomUtils;
 import com.tsco.api.utils.StringUtils;
@@ -11,14 +12,16 @@ import com.tsco.web.domain.Response;
 import com.tsco.web.domain.vo.RegisterForm;
 import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
+import com.tsco.web.service.RedisService;
 import com.tsco.web.service.impl.UserService;
+import com.tsco.web.utils.Constans;
 import com.tsco.web.utils.PatternRegex;
+import com.tsco.web.utils.RedisKeyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +40,7 @@ public class RegisterController {
     private MailSenderDubboService mailSenderDubboService;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisService<String> redisService;
 
     @ApiOperation(value = "用户注册", notes = "用户注册")
     @ApiImplicitParams({
@@ -63,6 +66,8 @@ public class RegisterController {
     @RequestMapping(value = "/get-verification-code", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response sendVerificationCode(@RequestParam(value = "email") String email) {
         checkEmail(email);
+        //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出
+        redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
         Map<String, Object> map = new HashMap<>();
         String verificationCode = RandomUtils.generateVerificationCode();
         map.put(TemplateParam.VERIFICATION_CODE.getName(), verificationCode);
@@ -71,10 +76,12 @@ public class RegisterController {
                 .subject(EmailTemplateEnum.REGISTER_VERIFICATION.getDesc())
                 .params(map)
                 .build();
-        mailSenderDubboService.sendHtmlEmailWithTemplate(mailSenderDTO);
-        //todo 后面会封装redis
-        redisTemplate.delete("RegisterController" + "sendVerificationCode" + email);
-        redisTemplate.opsForValue().set("RegisterController" + "sendVerificationCode" + email, verificationCode);
+        try {
+            mailSenderDubboService.sendHtmlEmailWithTemplate(mailSenderDTO);
+        } catch (ASException as) {
+            throw new WebException(ExceptionCode.INNER_ERROR, "邮件服务异常");
+        }
+        redisService.setWithMinutes(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email), verificationCode, 3);
         return Response.SUCCESS();
     }
 

@@ -2,6 +2,7 @@ package com.tsco.common.service.impl;
 
 
 import com.tsco.api.domain.enums.EmailTemplateEnum;
+import com.tsco.api.domain.exception.ASException;
 import com.tsco.common.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -94,7 +95,8 @@ public class MailServiceImpl implements MailService {
             helper.setText(content, true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            //todo 加日志
+            throw new ASException("邮件发送失败");
         }
     }
 
