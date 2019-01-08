@@ -60,7 +60,7 @@ public class RegisterController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String")
     })
-    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/get-verification-code", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response sendVerificationCode(@RequestParam(value = "email") String email) {
         checkEmail(email);
         Map<String, Object> map = new HashMap<>();
