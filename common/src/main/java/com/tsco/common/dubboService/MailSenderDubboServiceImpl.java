@@ -1,7 +1,7 @@
 package com.tsco.common.dubboService;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.tsco.api.domain.MailSenderDTO;
+import com.tsco.api.domain.dto.MailSenderDTO;
 import com.tsco.api.dubboService.MailSenderDubboService;
 import com.tsco.common.service.impl.MailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

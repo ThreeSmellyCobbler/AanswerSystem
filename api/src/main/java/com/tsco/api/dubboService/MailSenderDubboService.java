@@ -1,6 +1,6 @@
 package com.tsco.api.dubboService;
 
-import com.tsco.api.domain.MailSenderDTO;
+import com.tsco.api.domain.dto.MailSenderDTO;
 
 public interface MailSenderDubboService {
 
