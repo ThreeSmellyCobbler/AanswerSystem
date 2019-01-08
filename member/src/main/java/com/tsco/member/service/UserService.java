@@ -18,7 +18,7 @@ public interface UserService {
      * @param user
      * @return 保存状态
      */
-    boolean saveUser(User user);
+    void saveUser(User user);
 
     /**
      * 通过用户email查找用户

@@ -42,9 +42,6 @@ public class LoginController {
             new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");
         }
         UserDTO userDTO = userService.login(loginForm);
-        if (userDTO == null) {
-            return Response.FAIL(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不正确");
-        }
         request.getSession().setAttribute(Constans.USER_ID, userDTO.getId());
         return Response.SUCCESS();
 

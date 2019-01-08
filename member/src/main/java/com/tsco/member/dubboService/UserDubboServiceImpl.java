@@ -3,6 +3,7 @@ package com.tsco.member.dubboService;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.tsco.api.domain.UserDTO;
+import com.tsco.api.domain.exception.ASException;
 import com.tsco.api.dubboService.UserDubboService;
 import com.tsco.member.domain.po.User;
 import com.tsco.member.service.UserService;
@@ -25,21 +26,23 @@ public class UserDubboServiceImpl implements UserDubboService {
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = dozerBeanMapper.map(userDTO, User.class);
-        if (!userService.saveUser(user)) {
-            log.error("save user fail,userId is: {]", JSONUtils.toJSONString(user));
-            throw new RuntimeException("保存对象失败");
+        try {
+            userService.saveUser(user);
+            log.info("user save success,user is:{}", user);
+        } catch (Exception e) {
+            log.error("user save fail,user email is:{}", user.getEmail(), e);
+            throw new ASException("用户保存失败");
         }
-        userDTO.setId(user.getId());
         return userDTO;
     }
 
     @Override
-    public UserDTO findUserByEmail(UserDTO userDTO) {
-        Optional<User> userOptional = userService.findUserByEmail(userDTO.getEmail());
-        if (userOptional.isPresent()) {
-            return dozerBeanMapper.map(userOptional.get(), userDTO.getClass());
+    public UserDTO findUserByEmail(String email) {
+        Optional<User> userOptional = userService.findUserByEmail(email);
+        if (!userOptional.isPresent()) {
+            log.info("user email is not exist,email is: {}", email);
+            return null;
         }
-        log.info("user login fail,login email is: {}", userDTO.getEmail());
-        return null;
+        return dozerBeanMapper.map(userOptional.get(), UserDTO.class);
     }
 }

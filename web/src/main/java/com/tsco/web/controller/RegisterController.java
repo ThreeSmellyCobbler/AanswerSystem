@@ -42,25 +42,18 @@ public class RegisterController {
     @ApiOperation(value = "用户注册", notes = "用户注册")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String"),
-            @ApiImplicitParam(name = "password", value = "密码", paramType = "String")
+            @ApiImplicitParam(name = "password", value = "密码", paramType = "String"),
+            @ApiImplicitParam(name = "verificationCode", value = "验证码", paramType = "String")
+
     })
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Response register(@RequestBody RegisterForm registerForm) {
-        if (StringUtils.isNullOrEmpty(registerForm.getEmail()) || StringUtils.isNullOrEmpty(registerForm.getPassword()) || StringUtils.isNullOrEmpty(registerForm.getVerificationCode())) {
+        if (StringUtils.isNullOrEmpty(registerForm.getPassword()) || StringUtils.isNullOrEmpty(registerForm.getVerificationCode())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "注册参数不能为空");
         }
-        //校验email
-        if (!registerForm.getEmail().matches(PatternRegex.email)) {
-            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱格式不正确");
-        }
-        if (!registerForm.getVerificationCode().equals(redisTemplate.opsForValue().get("RegisterController" + "sendVerificationCode" + registerForm.getEmail()))) {
-            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱验证码不正确");
-        }
-        UserDTO userDTO = userService.creatUser(userService.generateUserDTO(registerForm));
-        if (userDTO != null) {
-            return Response.SUCCESS();
-        }
-        return Response.FAIL(ExceptionCode.INNER_ERROR, "创建用户异常");
+        checkEmail(registerForm.getEmail());
+        UserDTO userDTO = userService.register(registerForm);
+        return Response.SUCCESS(userDTO);
     }
 
     @ApiOperation(value = "获取验证码", notes = "发送到邮箱")
@@ -69,13 +62,7 @@ public class RegisterController {
     })
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response sendVerificationCode(@RequestParam(value = "email") String email) {
-        if (StringUtils.isNullOrEmpty(email)) {
-            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱不能为空");
-        }
-        //校验email
-        if (!email.matches(PatternRegex.email)) {
-            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱格式不正确");
-        }
+        checkEmail(email);
         Map<String, Object> map = new HashMap<>();
         String verificationCode = RandomUtils.generateVerificationCode();
         map.put(TemplateParam.VERIFICATION_CODE.getName(), verificationCode);
@@ -89,6 +76,16 @@ public class RegisterController {
         redisTemplate.delete("RegisterController" + "sendVerificationCode" + email);
         redisTemplate.opsForValue().set("RegisterController" + "sendVerificationCode" + email, verificationCode);
         return Response.SUCCESS();
+    }
+
+    private void checkEmail(String email) {
+        if (StringUtils.isNullOrEmpty(email)) {
+            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱不能为空");
+        }
+        //校验email
+        if (!email.matches(PatternRegex.email)) {
+            throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱格式不正确");
+        }
     }
 
 }

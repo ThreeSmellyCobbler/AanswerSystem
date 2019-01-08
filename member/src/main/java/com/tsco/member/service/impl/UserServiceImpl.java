@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public boolean saveUser(User user) {
-        return userMapper.persit(user) == 1;
+    public void saveUser(User user) {
+        userMapper.persit(user);
     }
 
     @Override
