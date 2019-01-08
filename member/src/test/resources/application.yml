@@ -5,7 +5,7 @@ dubbo:
         name: member
     protocol:
         name: dubbo
-        port: 20882
+        port: 21881
     registry:
         address: zookeeper://127.0.0.1:2181
         check: true

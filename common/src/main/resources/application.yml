@@ -5,7 +5,7 @@ dubbo:
         name: common
     protocol:
         name: dubbo
-        port: 20883
+        port: 20882
     registry:
         address: zookeeper://101.132.143.173:2181
         check: true
