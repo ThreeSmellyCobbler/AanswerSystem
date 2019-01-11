@@ -1,8 +1,6 @@
 package com.tsco.api.dubboService;
 
-import com.tsco.api.domain.UserDTO;
-
-import java.util.Optional;
+import com.tsco.api.domain.dto.UserDTO;
 
 public interface UserDubboService {
 

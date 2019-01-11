@@ -1,8 +1,7 @@
 package com.tsco.member.dubboService;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.tsco.api.domain.UserDTO;
+import com.tsco.api.domain.dto.UserDTO;
 import com.tsco.api.domain.exception.ASException;
 import com.tsco.api.dubboService.UserDubboService;
 import com.tsco.member.domain.po.User;

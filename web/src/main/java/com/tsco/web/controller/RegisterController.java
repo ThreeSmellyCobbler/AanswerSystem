@@ -1,6 +1,5 @@
 package com.tsco.web.controller;
 
-import com.tsco.api.domain.UserDTO;
 import com.tsco.api.domain.dto.MailSenderDTO;
 import com.tsco.api.domain.enums.EmailTemplateEnum;
 import com.tsco.api.domain.enums.TemplateParam;
@@ -10,6 +9,7 @@ import com.tsco.api.utils.RandomUtils;
 import com.tsco.api.utils.StringUtils;
 import com.tsco.web.domain.Response;
 import com.tsco.web.domain.vo.RegisterForm;
+import com.tsco.web.domain.vo.UserVo;
 import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
 import com.tsco.web.service.RedisService;
@@ -57,8 +57,8 @@ public class RegisterController {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "注册参数不能为空");
         }
         checkEmail(registerForm.getEmail());
-        UserDTO userDTO = userService.register(registerForm);
-        return Response.SUCCESS(userDTO);
+        UserVo userVo = userService.register(registerForm);
+        return Response.SUCCESS(userVo);
     }
 
     @ApiOperation(value = "获取验证码", notes = "发送到邮箱")
