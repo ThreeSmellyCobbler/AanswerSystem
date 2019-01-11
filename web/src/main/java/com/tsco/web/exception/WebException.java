@@ -14,11 +14,6 @@ public class WebException extends RuntimeException {
 
     private String message;
 
-    public WebException(String message) {
-        this.code = ExceptionCode.INNER_ERROR;
-        this.message = message;
-    }
-
     public WebException(String code, String message) {
         this.code = code;
         this.message = message;

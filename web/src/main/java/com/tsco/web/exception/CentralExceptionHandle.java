@@ -19,7 +19,7 @@ public class CentralExceptionHandle {
 
     @ExceptionHandler(WebException.class)
     @ResponseBody
-    public Response handleActivityException(HttpServletRequest request, WebException we) {
+    public Response handleWebException(HttpServletRequest request, WebException we) {
         return Response.FAIL(we.getCode(), we.getMessage());
     }
 

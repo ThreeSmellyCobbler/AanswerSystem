@@ -82,6 +82,7 @@ public class RegisterController {
         try {
             mailSenderDubboService.sendHtmlEmailWithTemplate(mailSenderDTO);
         } catch (ASException as) {
+            log.info("mail sender fail", as);
             throw new WebException(ExceptionCode.INNER_ERROR, "邮件服务异常");
         }
         redisService.setWithMinutes(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email), verificationCode, 3);
