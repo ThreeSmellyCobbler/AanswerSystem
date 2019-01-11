@@ -115,13 +115,13 @@ public class MailServiceImpl implements MailService {
      * @param params        模板参数
      */
     public void sendHtmlEmailWithTemplate(String to, String subject, EmailTemplateEnum emailTemplate, Map<String, Object> params) {
-        log.info("send html email with template begin,to:{},subject:{},template:{},params:{}", to, subject, templateEngine, params);
+        log.info("send html email with template begin,to:{},subject:{},template:{},params:{}", to, subject, emailTemplate, params);
         String content = renderTemplate(emailTemplate, params);
         if (content.isEmpty()) {
             return;
         }
         sendHtmlMail(to, subject, content);
-        log.info("send html email with template finish,to:{},subject:{},template:{},params:{}", to, subject, templateEngine, params);
+        log.info("send html email with template finish,to:{},subject:{},template:{},params:{}", to, subject, emailTemplate, params);
     }
 
     private String renderTemplate(EmailTemplateEnum emailTemplate, Map<String, Object> params) {

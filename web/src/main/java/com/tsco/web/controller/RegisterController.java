@@ -77,6 +77,7 @@ public class RegisterController {
         MailSenderDTO mailSenderDTO = MailSenderDTO.builder()
                 .to(email)
                 .subject(EmailTemplateEnum.REGISTER_VERIFICATION.getDesc())
+                .templateEnum(EmailTemplateEnum.REGISTER_VERIFICATION)
                 .params(map)
                 .build();
         try {
