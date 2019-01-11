@@ -36,7 +36,7 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", paramType = "String")
     })
     @RequestMapping(method = RequestMethod.POST)
-    public Response login(@RequestBody LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
+    public Response<UserVo> login(@RequestBody LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
         log.info("user login begin,email is: {},password is: {}", loginForm.getEmail(), loginForm.getPassword());
         if (loginForm.getEmail() == null || loginForm.getPassword() == null) {
             new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");

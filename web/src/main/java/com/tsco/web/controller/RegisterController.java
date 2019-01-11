@@ -52,7 +52,7 @@ public class RegisterController {
 
     })
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Response register(@RequestBody RegisterForm registerForm) {
+    public Response<UserVo> register(@RequestBody RegisterForm registerForm) {
         if (StringUtils.isNullOrEmpty(registerForm.getPassword()) || StringUtils.isNullOrEmpty(registerForm.getVerificationCode())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "注册参数不能为空");
         }
@@ -66,7 +66,7 @@ public class RegisterController {
             @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String")
     })
     @GetMapping(value = "/get-verification-code")
-    public Response sendVerificationCode(@RequestParam(value = "email") String email) {
+    public Response<String> sendVerificationCode(@RequestParam(value = "email") String email) {
         checkEmail(email);
         //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出
         redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
