@@ -21,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Api(description = "注册相关接口", tags = "register")
 @RestController
 @RequestMapping(path = "/register")
@@ -63,8 +65,9 @@ public class RegisterController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String")
     })
-    @RequestMapping(value = "/get-verification-code", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get-verification-code")
     public Response sendVerificationCode(@RequestParam(value = "email") String email) {
+        log.info("send verification code start========");
         checkEmail(email);
         //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出
         redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
