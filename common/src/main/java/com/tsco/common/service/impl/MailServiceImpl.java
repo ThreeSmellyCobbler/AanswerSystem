@@ -4,6 +4,7 @@ package com.tsco.common.service.impl;
 import com.tsco.api.domain.enums.EmailTemplateEnum;
 import com.tsco.api.domain.exception.ASException;
 import com.tsco.common.service.MailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -19,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class MailServiceImpl implements MailService {
 
@@ -40,12 +42,14 @@ public class MailServiceImpl implements MailService {
      */
     @Override
     public void sendSimpleMail(String to, String subject, String content) {
+        log.info("send simple mail begin,to:{},subject:{},content:{}", to, subject, content);
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(username);
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(content);
         javaMailSender.send(simpleMailMessage);
+        log.info("send simple mail finish,to:{},subject:{},content:{}", to, subject, content);
     }
 
     /**
@@ -86,6 +90,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendHtmlMail(String to, String subject, String content) {
+        log.info("send html mail begin,to:{},subject:{},content:{}", to, subject, content);
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
@@ -94,8 +99,9 @@ public class MailServiceImpl implements MailService {
             helper.setSubject(subject);
             helper.setText(content, true);
             javaMailSender.send(mimeMessage);
+            log.info("send html mail finish,to:{},subject:{},content:{}", to, subject, content);
         } catch (MessagingException e) {
-            //todo 加日志
+            log.error("send html mail fail,to:{},subject:{},content:{}", to, subject, content);
             throw new ASException("邮件发送失败");
         }
     }
@@ -109,11 +115,13 @@ public class MailServiceImpl implements MailService {
      * @param params        模板参数
      */
     public void sendHtmlEmailWithTemplate(String to, String subject, EmailTemplateEnum emailTemplate, Map<String, Object> params) {
+        log.info("send html email with template begin,to:{},subject:{},template:{},params:{}", to, subject, templateEngine, params);
         String content = renderTemplate(emailTemplate, params);
         if (content.isEmpty()) {
             return;
         }
         sendHtmlMail(to, subject, content);
+        log.info("send html email with template finish,to:{},subject:{},template:{},params:{}", to, subject, templateEngine, params);
     }
 
     private String renderTemplate(EmailTemplateEnum emailTemplate, Map<String, Object> params) {
