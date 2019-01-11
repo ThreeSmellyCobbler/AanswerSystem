@@ -100,8 +100,8 @@ public class MailServiceImpl implements MailService {
             helper.setText(content, true);
             javaMailSender.send(mimeMessage);
             log.info("send html mail finish,to:{},subject:{},content:{}", to, subject, content);
-        } catch (MessagingException e) {
-            log.error("send html mail fail,to:{},subject:{},content:{}", to, subject, content);
+        } catch (Exception e) {
+            log.error("send html mail fail,to:{},subject:{},content:{}", to, subject, content, e);
             throw new ASException("邮件发送失败");
         }
     }

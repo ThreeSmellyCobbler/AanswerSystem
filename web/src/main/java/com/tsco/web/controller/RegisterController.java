@@ -67,7 +67,6 @@ public class RegisterController {
     })
     @GetMapping(value = "/get-verification-code")
     public Response sendVerificationCode(@RequestParam(value = "email") String email) {
-        log.info("send verification code start========");
         checkEmail(email);
         //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出
         redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
@@ -83,7 +82,7 @@ public class RegisterController {
         try {
             mailSenderDubboService.sendHtmlEmailWithTemplate(mailSenderDTO);
         } catch (ASException as) {
-            log.info("mail sender fail", as);
+            log.error("mail sender fail", as);
             throw new WebException(ExceptionCode.INNER_ERROR, "邮件服务异常");
         }
         redisService.setWithMinutes(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email), verificationCode, 3);
