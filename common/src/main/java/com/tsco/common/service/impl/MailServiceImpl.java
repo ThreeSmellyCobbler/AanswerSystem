@@ -90,7 +90,7 @@ public class MailServiceImpl implements MailService {
      */
 
     @Override
-//    @Async
+    @Async
     public void sendHtmlMail(String to, String subject, String content) {
         log.info("send html mail begin,to:{},subject:{},content:{}", to, subject, content);
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
