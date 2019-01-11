@@ -1,8 +1,8 @@
 package com.tsco.web.controller;
 
-import com.tsco.api.domain.UserDTO;
 import com.tsco.web.domain.Response;
 import com.tsco.web.domain.vo.LoginForm;
+import com.tsco.web.domain.vo.UserVo;
 import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
 import com.tsco.web.service.impl.UserService;
@@ -41,8 +41,8 @@ public class LoginController {
         if (loginForm.getEmail() == null || loginForm.getPassword() == null) {
             new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或者密码不能为空");
         }
-        UserDTO userDTO = userService.login(loginForm);
-        request.getSession().setAttribute(Constans.USER_ID, userDTO.getId());
+        UserVo userVo = userService.login(loginForm);
+        request.getSession().setAttribute(Constans.USER_ID, userVo.getId());
         return Response.SUCCESS();
 
     }
