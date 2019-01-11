@@ -1,6 +1,5 @@
 package com.tsco.common.service;
 
-import com.tsco.common.service.impl.MailServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class MailServiceImplTest {
 
     @Autowired
-    private MailServiceImpl mailService;
+    private MailService mailService;
 
     @Test
     public void test() {

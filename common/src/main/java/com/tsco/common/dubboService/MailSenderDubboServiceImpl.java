@@ -3,14 +3,14 @@ package com.tsco.common.dubboService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.tsco.api.domain.dto.MailSenderDTO;
 import com.tsco.api.dubboService.MailSenderDubboService;
-import com.tsco.common.service.impl.MailServiceImpl;
+import com.tsco.common.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service(version = "1.0.0")
 public class MailSenderDubboServiceImpl implements MailSenderDubboService {
 
     @Autowired
-    private MailServiceImpl mailService;
+    private MailService mailService;
 
     @Override
     public void sendSimpleMail(MailSenderDTO mailSenderDTO) {
