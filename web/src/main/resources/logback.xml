@@ -29,9 +29,12 @@
     </appender>
 
     <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="LOG_FILE"/>
+    </root>
+
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="LOG_FILE"/>
     </root>
 
     <!--用于对某个具体的包，具体的类的打印日志进行特殊处理-->
