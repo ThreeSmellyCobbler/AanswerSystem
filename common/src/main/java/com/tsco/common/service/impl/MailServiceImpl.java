@@ -88,7 +88,6 @@ public class MailServiceImpl implements MailService {
      * @param subject 邮件标题
      * @param content 邮件内容
      */
-
     @Override
     @Async
     public void sendHtmlMail(String to, String subject, String content) {
