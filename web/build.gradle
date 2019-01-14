@@ -17,6 +17,7 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.0.RELEASE'
 
     compile project(':api')
+    compile project(':answer')
 
 }
 

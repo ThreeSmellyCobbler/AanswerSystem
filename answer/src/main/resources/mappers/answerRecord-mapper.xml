@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsco.answer.mapper.AnswerRecordMapper">
+    <sql id="Base_Column_List">
+        ID,USER_ID,SUBJECT_ID,RESULT,CREATED_AT,UPDATED_AT
+    </sql>
+
+    <select id="load" parameterType="java.lang.Integer" resultType="com.tsco.answer.domain.po.AnswerRecord">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ANSWER_RECORD WHERE ID=#{id}
+    </select>
+
+    <insert id="persit" parameterType="com.tsco.answer.domain.po.AnswerRecord" useGeneratedKeys="true" keyColumn="ID"
+            keyProperty="id">
+        INSERT INTO ANSWER_RECORD
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                USER_ID,
+            </if>
+            <if test="subjectId!=null">
+                SUBJECT_ID,
+            </if>
+            <if test="result!=null">
+                RESULT,
+            </if>
+            <if test="createdAt!=null">
+                CREATED_AT,
+            </if>
+            <if test="updatedAt!=null">
+                UPDATED_AT,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                #{userId},
+            </if>
+            <if test="subjectId!=null">
+                #{subjectId},
+            </if>
+            <if test="result!=null">
+                #{result},
+            </if>
+            <if test="createdAt!=null">
+                #{createdAt},
+            </if>
+            <if test="updatedAt!=null">
+                #{updatedAt},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.tsco.answer.domain.po.AnswerRecord">
+        UPDATE ANSWER_RECORD SET
+        <trim suffixOverrides=",">
+            <if test="userId!=null">
+                USER_ID=#{userId},
+            </if>
+            <if test="subjectId!=null">
+                SUBJECT_ID=#{subjectId},
+            </if>
+            <if test="result!=null">
+                RESULT=#{result},
+            </if>
+            <if test="createdAt!=null">
+                CREATED_AT=#{createdAt},
+            </if>
+            <if test="updatedAt!=null">
+                UPDATED_AT=#{updatedAt},
+            </if>
+        </trim>
+    </update>
+
+</mapper>

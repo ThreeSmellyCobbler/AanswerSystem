@@ -3,4 +3,5 @@ include 'web'
 include 'member'
 include 'common'
 include 'api'
+include 'answer'
 
