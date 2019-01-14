@@ -1,3 +1,4 @@
+/*
 package com.tsco.answer.Mapper;
 
 import com.tsco.answer.domain.po.Subject;
@@ -39,3 +40,4 @@ public class SubjectMapperTest {
 
 
 }
+*/
