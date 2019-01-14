@@ -3,8 +3,6 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     //spring boot web starter
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
-    compile 'com.alibaba:druid-spring-boot-starter:1.1.10'
 
     //spring boot dubbo starter
     compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
