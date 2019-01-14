@@ -1,6 +1,7 @@
 package com.tsco.web.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 
+@Slf4j
 @EnableTransactionManagement
 @Configuration
 @MapperScan(value = "com.tsco.answer")
@@ -59,7 +61,7 @@ public class MybatisConfig {
             sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
             return sqlSessionFactoryBean.getObject();
         } catch (Exception e) {
-            System.out.println("===============出现异常了================");
+            log.info("===============出现异常了================,detail message is:{}", e.getMessage());
             return null;
         }
     }
