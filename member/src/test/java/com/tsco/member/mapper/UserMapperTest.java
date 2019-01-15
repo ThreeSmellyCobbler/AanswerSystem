@@ -2,7 +2,6 @@ package com.tsco.member.mapper;
 
 import com.tsco.member.domain.po.User;
 import com.tsco.member.mapper.user.UserMapper;
-import com.tsco.member.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

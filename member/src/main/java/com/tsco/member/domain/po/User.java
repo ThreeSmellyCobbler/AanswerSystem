@@ -1,5 +1,7 @@
 package com.tsco.member.domain.po;
 
+import com.tsco.api.domain.enums.GenderEnum;
+import com.tsco.member.enums.UserRoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,13 +23,13 @@ public class User {
     //登录密码
     private String password;
     //性别
-    private String gender;
+    private GenderEnum gender;
     //生日
     private Date birthday;
     //地址
     private String address;
     //用户类型
-    private String userRole;
+    private UserRoleEnum userRole;
     //创建时间
     private Date createdAt;
     //更新时间

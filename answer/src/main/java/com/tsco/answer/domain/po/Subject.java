@@ -1,5 +1,7 @@
 package com.tsco.answer.domain.po;
 
+import com.tsco.api.domain.enums.SubjectStatusEnum;
+import com.tsco.api.domain.enums.SubjectTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +25,7 @@ public class Subject {
     /**
      * 题目类型
      */
-    private String type;
+    private SubjectTypeEnum type;
     /**
      * 题目标题
      */
@@ -47,7 +49,7 @@ public class Subject {
     /**
      * 题目状态
      */
-    private String status;
+    private SubjectStatusEnum status;
 
     /**
      * 题目创建时间
