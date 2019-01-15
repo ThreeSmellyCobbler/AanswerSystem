@@ -101,5 +101,15 @@
         </where>
     </update>
 
+    <select id="pageQuerySubjects" parameterType="int" resultType="com.tsco.answer.domain.po.Subject">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SUBJECT LIMIT #{from},#{size}
+    </select>
+
+    <select id="countSubjects" resultType="java.lang.Integer">
+        COUNT (*) FROM SUBJECT;
+    </select>
+
 
 </mapper>

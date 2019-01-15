@@ -1,0 +1,1 @@
+alter table answer_record add column CORRECT varchar(10);

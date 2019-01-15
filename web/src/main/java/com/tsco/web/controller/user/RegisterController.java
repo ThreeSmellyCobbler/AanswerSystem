@@ -1,4 +1,4 @@
-package com.tsco.web.controller;
+package com.tsco.web.controller.user;
 
 import com.tsco.api.domain.dto.MailSenderDTO;
 import com.tsco.api.domain.enums.EmailTemplateEnum;

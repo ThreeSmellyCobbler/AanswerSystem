@@ -1,4 +1,4 @@
-package com.tsco.web.controller;
+package com.tsco.web.controller.user;
 
 import com.tsco.web.domain.Response;
 import com.tsco.web.domain.vo.LoginForm;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tsco.answer.mapper.AnswerRecordMapper">
     <sql id="Base_Column_List">
-        ID,USER_ID,SUBJECT_ID,RESULT,CREATED_AT,UPDATED_AT
+        ID,USER_ID,SUBJECT_ID,RESULT,CREATED_AT,UPDATED_AT,CORRECT
     </sql>
 
     <select id="load" parameterType="java.lang.Integer" resultType="com.tsco.answer.domain.po.AnswerRecord">
@@ -30,6 +30,9 @@
             <if test="updatedAt!=null">
                 UPDATED_AT,
             </if>
+            <if test="correct!=null">
+                CORRECT,
+            </if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
             <if test="userId!=null">
@@ -47,6 +50,10 @@
             <if test="updatedAt!=null">
                 #{updatedAt},
             </if>
+            <if test="correct!=null">
+                #{correct},
+            </if>
+
         </trim>
     </insert>
 
@@ -67,6 +74,9 @@
             </if>
             <if test="updatedAt!=null">
                 UPDATED_AT=#{updatedAt},
+            </if>
+            <if test="correct!=null">
+                CORRECT=#{correct},
             </if>
         </trim>
     </update>

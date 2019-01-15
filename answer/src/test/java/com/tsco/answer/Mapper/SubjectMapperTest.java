@@ -37,5 +37,10 @@ public class SubjectMapperTest {
         subjectMapper.update(subject);
     }
 
+    @Test
+    public void testPageQuerySubjects() {
+        subjectMapper.pageQuerySubjects(1, 10);
+    }
+
 
 }
