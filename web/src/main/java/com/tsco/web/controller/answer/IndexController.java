@@ -61,7 +61,7 @@ public class IndexController {
                 .id(subject.getId())
                 .title(subject.getTitle())
                 .content(Arrays.asList(subject.getContent().split("@")))
-                .type(subject.getType())
+                .type(subject.getType().name())
                 .build();
     }
 
