@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * web 启动类
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.tsco.answer"})
+@ComponentScan(basePackages = {"com.tsco.answer","com.tsco.web"})
 @MapperScan(basePackages = {"com.tsco.answer"})
 public class WebApplication {
 
