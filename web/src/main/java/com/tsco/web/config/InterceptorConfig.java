@@ -6,29 +6,21 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Arrays;
-
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class InterceptorConfig implements WebMvcConfigurer {
 
     @Autowired
-    private LoginInterceptor loginInterceptor;
+    private WebInterceptor webInterceptor;
 
-    /**
-     * 拦截器配置
-     *
-     * @param registry
-     * @auto chen jia
-     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor)
+        //这里可以添加多个拦截器,组成一个拦截器链
+        registry.addInterceptor(webInterceptor)
                 //拦截所有请求
-                .addPathPatterns("/**")
-                //排除登录、注册
-                .excludePathPatterns(Arrays.asList("/login", "/register/*"))
-                //排除swagger
-                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
+                .addPathPatterns("/**");
+//                .excludePathPatterns(Arrays.asList("/login", "/register/*"))
+//                排除swagger
+//                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
 
     /**

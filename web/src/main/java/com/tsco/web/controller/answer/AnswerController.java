@@ -1,6 +1,7 @@
 package com.tsco.web.controller.answer;
 
 import com.tsco.answer.service.AnswerService;
+import com.tsco.web.config.annotations.Interceptor;
 import com.tsco.web.controller.BaseController;
 import com.tsco.web.domain.Response;
 import com.tsco.web.exception.ExceptionCode;
@@ -30,6 +31,7 @@ public class AnswerController extends BaseController {
             @ApiImplicitParam(name = "answer", value = "答案", paramType = "String")
     })
     @RequestMapping(value = "/submit", method = RequestMethod.GET)
+    @Interceptor(needLogin = true)
     public Response submit(@RequestParam("subjectId") Integer subjectId, @RequestParam("answer") String answer) {
         if (subjectId == null || answer == null) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
