@@ -1,0 +1,11 @@
+server:
+    port: 7070
+    servlet:
+      context-path: /web/service/
+dubbo:
+    application:
+        name: web
+    registry:
+        address: zookeeper://127.0.0.1:2181
+logging:
+  config: classpath:logback/logback-dev.xml
