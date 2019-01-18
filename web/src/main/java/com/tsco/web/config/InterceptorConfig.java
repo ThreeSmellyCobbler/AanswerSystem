@@ -21,9 +21,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(webInterceptor)
                 //拦截所有请求
                 .addPathPatterns("/**");
-//                .excludePathPatterns(Arrays.asList("/login", "/register/*"))
-//                排除swagger
-//                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
 
     /**
