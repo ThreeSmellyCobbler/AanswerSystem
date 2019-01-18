@@ -39,14 +39,12 @@ public class RedisConfig {
      */
     @Bean("myJedisConnectionFactory")
     public JedisConnectionFactory getJedisConnectionFactory() {
-        log.info("myJedisConnectionFactory begin");
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(hostName);
         configuration.setDatabase(Integer.valueOf(dataBaseIndex));
         configuration.setPassword(RedisPassword.none());
         configuration.setPort(Integer.valueOf(port));
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(configuration);
-        log.info("myJedisConnectionFactory end,myJedisConnectionFactory is:{}", jedisConnectionFactory);
         return jedisConnectionFactory;
     }
 
