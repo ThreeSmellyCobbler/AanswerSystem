@@ -1,15 +1,12 @@
 package com.tsco.web.config;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -17,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+@Slf4j
 @Configuration
 @PropertySource(value = "classpath:redis.properties")
 public class RedisConfig {
@@ -39,20 +37,22 @@ public class RedisConfig {
      *
      * @return
      */
-    @Bean
+    @Bean("myJedisConnectionFactory")
     public JedisConnectionFactory getJedisConnectionFactory() {
+        log.info("myJedisConnectionFactory begin");
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(hostName);
         configuration.setDatabase(Integer.valueOf(dataBaseIndex));
         configuration.setPassword(RedisPassword.none());
         configuration.setPort(Integer.valueOf(port));
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(configuration);
+        log.info("myJedisConnectionFactory end,myJedisConnectionFactory is:{}", jedisConnectionFactory);
         return jedisConnectionFactory;
     }
 
     @Primary
     @Bean(name = "myRedisTemplate")
-    public RedisTemplate<String, Object> redisTemplate() {
+    public RedisTemplate<String, Object> redisTemplate(@Qualifier("myJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
         //StringRedisTemplate的构造方法中默认设置了stringSerializer
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         //set key serializer
@@ -62,21 +62,9 @@ public class RedisConfig {
         template.setValueSerializer(objectJackson2JsonRedisSerializer);
         template.setHashValueSerializer(objectJackson2JsonRedisSerializer);
         template.setHashKeySerializer(stringRedisSerializer);
-        template.setConnectionFactory(getJedisConnectionFactory());
+        template.setConnectionFactory(jedisConnectionFactory);
         template.afterPropertiesSet();
         return template;
-    }
-
-    @Primary
-    @Bean(name = "myCacheManager")
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
-//                .entryTtl(Duration.ofMinutes(1)); // 设置缓存有效期一小时
-        RedisCacheManager redisCacheManager = RedisCacheManager
-                .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
-                .cacheDefaults(redisCacheConfiguration).build();
-        redisCacheManager.afterPropertiesSet();
-        return redisCacheManager;
     }
 
 }
