@@ -69,7 +69,11 @@ public class RegisterController {
     public Response<String> sendVerificationCode(@RequestParam(value = "email") String email) {
         checkEmail(email);
         //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出
-        redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
+        try {
+            redisService.delete(RedisKeyUtils.buildKey(Constans.VERIFICATION_KEY_PREFIX, email));
+        } catch (Exception e) {
+            log.error("encounter exception,exception is:{}", e);
+        }
         Map<String, Object> map = new HashMap<>();
         String verificationCode = RandomUtils.generateVerificationCode();
         map.put(TemplateParam.VERIFICATION_CODE.getName(), verificationCode);
