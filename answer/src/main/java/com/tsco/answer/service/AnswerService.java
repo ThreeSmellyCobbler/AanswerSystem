@@ -1,6 +1,7 @@
 package com.tsco.answer.service;
 
 import com.tsco.answer.domain.po.Subject;
+import com.tsco.answer.domain.vo.AnswerVo;
 
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface AnswerService {
      * @param result    答案
      * @return 是否正确
      */
-    void submit(int userId, int subjectId, String result);
+    AnswerVo submit(int userId, int subjectId, String result);
 }

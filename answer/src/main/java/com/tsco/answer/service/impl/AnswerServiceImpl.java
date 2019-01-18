@@ -2,6 +2,7 @@ package com.tsco.answer.service.impl;
 
 import com.tsco.answer.domain.po.AnswerRecord;
 import com.tsco.answer.domain.po.Subject;
+import com.tsco.answer.domain.vo.AnswerVo;
 import com.tsco.answer.mapper.AnswerRecordMapper;
 import com.tsco.answer.mapper.SubjectMapper;
 import com.tsco.answer.service.AnswerService;
@@ -34,7 +35,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public void submit(int userId, int subjectId, String result) {
+    public AnswerVo submit(int userId, int subjectId, String result) {
         Subject subject = subjectMapper.load(subjectId);
         if (subject == null) {
             log.error("submit exception userId is:{},subjectId is:{},result is:{}", userId, subjectId, result);
@@ -42,12 +43,30 @@ public class AnswerServiceImpl implements AnswerService {
         }
         AnswerRecord answerRecord = AnswerRecord.builder()
                 .userId(userId)
+                .subjectId(subjectId)
+                .result(result)
                 .createdAt(new Date())
                 .updatedAt(new Date())
-                .result(result)
-                .correct(result.equals(subject.getAnswer()))
-                .subjectId(subjectId)
+                .correct(isCorrectAnswer(subject, result))
                 .build();
         answerRecordMapper.persit(answerRecord);
+        return AnswerVo.builder()
+                .userId(userId)
+                .standardAnswer(subject.getAnswer())
+                .correct(answerRecord.getCorrect())
+                .build();
+    }
+
+    private Boolean isCorrectAnswer(Subject subject, String result) {
+        switch (subject.getType()) {
+            case ALGORITHM:
+                //todo 算法题后面处理是否正确
+                return true;
+            case SINGLE_CHOICE:
+                return subject.getAnswer().equals(result);
+            case MULTIPLY_CHOICE:
+                return subject.getAnswer().equals(result);
+        }
+        return null;
     }
 }

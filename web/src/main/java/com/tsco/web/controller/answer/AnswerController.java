@@ -1,6 +1,8 @@
 package com.tsco.web.controller.answer;
 
+import com.tsco.answer.domain.vo.AnswerVo;
 import com.tsco.answer.service.AnswerService;
+import com.tsco.api.utils.StringUtils;
 import com.tsco.web.config.annotations.Interceptor;
 import com.tsco.web.controller.BaseController;
 import com.tsco.web.domain.Response;
@@ -28,16 +30,17 @@ public class AnswerController extends BaseController {
     @ApiOperation(value = "提交答案", notes = "submit")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "subjectId", value = "题目id", paramType = "Inteager"),
-            @ApiImplicitParam(name = "answer", value = "答案", paramType = "String")
+            @ApiImplicitParam(name = "answer", value = "答案", paramType = "String"),
+            @ApiImplicitParam(name = "subjectType", value = "题目类型", paramType = "String")
     })
-    @RequestMapping(value = "/submit", method = RequestMethod.GET)
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @Interceptor(needLogin = true)
-    public Response submit(@RequestParam("subjectId") Integer subjectId, @RequestParam("answer") String answer) {
-        if (subjectId == null || answer == null) {
+    public Response<AnswerVo> submit(@RequestParam("subjectId") Integer subjectId, @RequestParam("subjectType") String subjectType, @RequestParam("answer") String answer) {
+        if (subjectId == null || StringUtils.isNullOrEmpty(answer) || StringUtils.isNullOrEmpty(subjectType)) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
         }
-        answerService.submit(getCurrentUserId(), subjectId, answer);
-        return Response.SUCCESS();
+        AnswerVo answerVo = answerService.submit(getCurrentUserId(), subjectId, answer);
+        return Response.SUCCESS(answerVo);
     }
 
 
