@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @author chen jia
  */
 @Configuration
-public class DubboConfig {
+public class DubboReferenceBeanConfig {
     private static final String VERSION = "1.0.0";
 
     @Bean
@@ -29,6 +29,10 @@ public class DubboConfig {
         ReferenceBean<MailSenderDubboService> referenceBean = new ReferenceBean<>();
         referenceBean.setInterface(MailSenderDubboService.class);
         referenceBean.setVersion(VERSION);
+        //设置超时时间3秒
+        referenceBean.setTimeout(3000);
+        //不重试
+        referenceBean.setRetries(0);
         return referenceBean;
     }
 
