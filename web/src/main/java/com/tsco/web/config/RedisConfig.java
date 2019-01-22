@@ -50,7 +50,7 @@ public class RedisConfig {
 
     @Primary
     @Bean(name = "myRedisTemplate")
-    public RedisTemplate<String, Object> redisTemplate(@Qualifier("myJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
+    public RedisTemplate redisTemplate(@Qualifier("myJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
         //StringRedisTemplate的构造方法中默认设置了stringSerializer
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         //set key serializer
