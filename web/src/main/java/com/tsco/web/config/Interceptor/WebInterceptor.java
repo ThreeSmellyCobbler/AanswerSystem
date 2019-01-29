@@ -21,6 +21,9 @@ public class WebInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

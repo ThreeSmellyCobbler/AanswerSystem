@@ -1,5 +1,6 @@
 package com.tsco.web.config.Interceptor;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,12 +16,11 @@ public class CrossDomainInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("P3P", "CP=CAO PSA OUR");
-        if (request.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(request.getMethod())) {
-            response.addHeader("Access-Control-Allow-Methods", "POST,GET,TRACE,OPTIONS");
-            response.addHeader("Access-Control-Allow-Headers", "Content-Type,Origin,Accept");
+        if (request.getHeader(HttpHeaders.ORIGIN) != null) {
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Credentials", "true");
+            response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
+            response.addHeader("Access-Control-Allow-Headers", "Content-Type");
             response.addHeader("Access-Control-Max-Age", "3600");
         }
         return true;
