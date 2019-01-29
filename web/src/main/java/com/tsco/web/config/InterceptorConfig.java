@@ -23,10 +23,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //这里可以添加多个拦截器,组成一个拦截器链
+        registry.addInterceptor(crossDomainInterceptor)
+                .addPathPatterns("/**");
         registry.addInterceptor(webInterceptor)
                 //拦截所有请求
-                .addPathPatterns("/**");
-        registry.addInterceptor(crossDomainInterceptor)
                 .addPathPatterns("/**");
     }
 
