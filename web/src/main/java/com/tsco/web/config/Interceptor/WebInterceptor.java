@@ -1,4 +1,4 @@
-package com.tsco.web.config;
+package com.tsco.web.config.Interceptor;
 
 import com.tsco.web.config.annotations.Interceptor;
 import com.tsco.web.utils.Constans;
