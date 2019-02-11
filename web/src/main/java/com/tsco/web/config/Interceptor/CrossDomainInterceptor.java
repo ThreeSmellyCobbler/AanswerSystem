@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 public class CrossDomainInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (request.getHeader(HttpHeaders.ORIGIN) != null && "OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Origin", "47.106.104.83");
             response.addHeader("Access-Control-Allow-Credentials", "true");
             response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type");
