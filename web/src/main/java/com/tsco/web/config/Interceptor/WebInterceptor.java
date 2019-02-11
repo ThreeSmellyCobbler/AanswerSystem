@@ -2,6 +2,7 @@ package com.tsco.web.config.Interceptor;
 
 import com.tsco.web.config.annotations.Interceptor;
 import com.tsco.web.utils.Constans;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,11 +17,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author chen jia
  */
 
+@Slf4j
 @Component
 public class WebInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info("login interceptor begin,method is :{},Access-Control-Allow-Origin is:{}", request.getMethod(), request.getHeader("Access-Control-Allow-Origin"));
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
