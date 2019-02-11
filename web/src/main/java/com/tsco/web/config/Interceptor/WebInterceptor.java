@@ -45,6 +45,10 @@ public class WebInterceptor implements HandlerInterceptor {
     }
 
     private boolean isNeedLoginIntercept(HttpServletRequest request, Interceptor interceptor) {
+        //没有注解 不需要登录拦截
+        if (interceptor == null) {
+            return false;
+        }
         //接口需要登录,但是用户没有登录,进行拦截
         if (interceptor.needLogin() && request.getSession().getAttribute(Constans.USER_ID) == null) {
             return true;
