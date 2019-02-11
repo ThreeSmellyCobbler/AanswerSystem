@@ -65,7 +65,7 @@ public class RegisterController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "邮箱", paramType = "String")
     })
-    @PostMapping(value = "/get-verification-code")
+    @GetMapping(value = "/get-verification-code")
     public Response<String> sendVerificationCode(@RequestParam(value = "email") String email) {
         checkEmail(email);
         //在发送邮件之前清理缓存,防止频繁调用接口,导致缓存溢出

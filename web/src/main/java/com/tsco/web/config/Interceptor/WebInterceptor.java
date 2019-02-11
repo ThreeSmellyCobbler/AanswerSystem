@@ -23,7 +23,6 @@ public class WebInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.info("login interceptor begin,method is :{},Access-Control-Allow-Origin is:{}", request.getMethod(), response.getHeader("Access-Control-Allow-Origin"));
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
@@ -51,6 +50,7 @@ public class WebInterceptor implements HandlerInterceptor {
         }
         //接口需要登录,但是用户没有登录,进行拦截
         if (interceptor.needLogin() && request.getSession().getAttribute(Constans.USER_ID) == null) {
+            log.info("user not login");
             return true;
         }
         return false;
