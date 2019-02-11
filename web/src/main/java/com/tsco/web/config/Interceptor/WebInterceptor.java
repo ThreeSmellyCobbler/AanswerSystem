@@ -23,7 +23,7 @@ public class WebInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("login interceptor begin,method is :{},Access-Control-Allow-Origin is:{}", request.getMethod(), request.getHeader("Access-Control-Allow-Origin"));
+        log.info("login interceptor begin,method is :{},Access-Control-Allow-Origin is:{}", request.getMethod(), response.getHeader("Access-Control-Allow-Origin"));
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
@@ -31,10 +31,6 @@ public class WebInterceptor implements HandlerInterceptor {
             return true;
         }
         Interceptor interceptor = ((HandlerMethod) handler).getMethodAnnotation(Interceptor.class);
-        if (interceptor == null) {
-            //如果没有使用注解,不拦截
-            return true;
-        }
         if (isNeedLoginIntercept(request, interceptor)) {
             return false;
         }
