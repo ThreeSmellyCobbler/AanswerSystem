@@ -33,7 +33,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
         corsRegistry.addMapping("/**")
-                .allowCredentials(false)
+                .allowCredentials(true)
                 .maxAge(3600)
                 .allowedMethods("GET", "POST")
                 .allowedOrigins("http://47.106.104.83", "http://127.0.0.1");
