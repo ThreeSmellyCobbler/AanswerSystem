@@ -22,11 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 public class WebInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         log.info("login interceptor begin,method is :{},Access-Control-Allow-Origin is:{}", request.getMethod(), response.getHeader("Access-Control-Allow-Origin"));
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            return true;
-        }
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
@@ -38,12 +35,12 @@ public class WebInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
     }
 
