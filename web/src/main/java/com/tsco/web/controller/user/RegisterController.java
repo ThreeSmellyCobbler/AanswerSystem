@@ -51,7 +51,7 @@ public class RegisterController {
             @ApiImplicitParam(name = "verificationCode", value = "验证码", paramType = "String")
 
     })
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Response<UserVo> register(@RequestBody RegisterForm registerForm) {
         if (StringUtils.isNullOrEmpty(registerForm.getPassword()) || StringUtils.isNullOrEmpty(registerForm.getVerificationCode())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "注册参数不能为空");
