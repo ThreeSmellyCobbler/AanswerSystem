@@ -1,0 +1,7 @@
+alter table SUBJECT drop foreign key created_by_foreign_key;
+
+alter table SUBJECT modify column  CREATED_BY varchar(20) unique comment '题目创建者';
+
+alter table USER add constraint unique(EMAIL);
+
+alter table SUBJECT add constraint created_by_foreign_key foreign key(CREATED_BY) references USER(EMAIL);

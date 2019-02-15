@@ -32,14 +32,14 @@ public class Subject {
     private String title;
 
     /**
-     * 题目内容
+     * 题目内容(选择题 选项用@分隔)
      */
     private String content;
 
     /**
      * 题目创建人
      */
-    private Long createdBy;
+    private String createdBy;
 
     /**
      * 题目答案
