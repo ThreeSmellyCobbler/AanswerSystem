@@ -41,7 +41,7 @@ public class IndexController {
         log.info("query subject list begin,pageIndex is:{},pageSize is:{}", pageIndex, pageSize);
         int totalSize = answerService.countSubjects();
         //一共多少页
-        int totalPage = totalSize / pageSize == 0 ? totalSize / pageSize : totalSize / pageSize + 1;
+        int totalPage = totalSize % pageSize == 0 ? totalSize / pageSize : totalSize / pageSize + 1;
         if (pageIndex <= 0) {
             pageIndex = 1;
         }
