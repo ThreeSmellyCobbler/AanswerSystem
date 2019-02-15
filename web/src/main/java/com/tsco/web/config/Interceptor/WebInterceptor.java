@@ -49,10 +49,10 @@ public class WebInterceptor implements HandlerInterceptor {
             return false;
         }
         //接口需要登录,但是用户没有登录,进行拦截
-        if (interceptor.needLogin() && request.getSession().getAttribute(Constans.USER_ID) == null) {
-            log.info("user not login");
-            return true;
-        }
+//        if (interceptor.needLogin() && request.getSession().getAttribute(Constans.USER_ID) == null) {
+//            log.info("user not login");
+//            return true;
+//        }
         return false;
     }
 }
