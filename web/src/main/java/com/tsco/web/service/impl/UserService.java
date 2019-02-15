@@ -49,7 +49,7 @@ public class UserService {
         UserDTO userDTO = userDubboService.findUserByEmail(loginForm.getEmail());
         if (userDTO == null) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或密码不正确");
-        } else if (!loginForm.getEmail().equals(userDTO.getPassword())) {
+        } else if (!loginForm.getPassword().equals(userDTO.getPassword())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "邮箱或密码不正确");
         }
         return transferUserDTOToVo(userDTO);
