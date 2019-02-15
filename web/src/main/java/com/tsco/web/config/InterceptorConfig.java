@@ -36,6 +36,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .maxAge(3600)
                 .allowedMethods("GET", "POST")
+                .allowedHeaders("*")
                 .allowedOrigins("http://47.106.104.83", "http://127.0.0.1");
     }
 
