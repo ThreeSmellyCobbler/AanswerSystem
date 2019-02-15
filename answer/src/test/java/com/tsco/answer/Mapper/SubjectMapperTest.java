@@ -43,4 +43,10 @@ public class SubjectMapperTest {
     }
 
 
+    @Test
+    public void testCountSubjects(){
+        subjectMapper.countSubjects();
+    }
+
+
 }

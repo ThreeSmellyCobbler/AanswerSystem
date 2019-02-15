@@ -108,7 +108,7 @@
     </select>
 
     <select id="countSubjects" resultType="java.lang.Integer">
-        COUNT (*) FROM SUBJECT;
+        select COUNT(*) FROM SUBJECT;
     </select>
 
 
