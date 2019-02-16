@@ -28,7 +28,7 @@ public abstract class BaseController {
         if (request.getSession().getAttribute(Constans.USER_ID) == null) {
             throw new WebException(ExceptionCode.UN_AUTHORITY, "需要登录");
         }
-        return (Integer) request.getSession().getAttribute(Constans.USER_ID);
+        return (int) (long) (request.getSession().getAttribute(Constans.USER_ID));
     }
 
 

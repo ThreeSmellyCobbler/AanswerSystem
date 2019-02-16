@@ -43,7 +43,7 @@ public class LoginController {
         }
         UserVo userVo = userService.login(loginForm);
         request.getSession().setAttribute(Constans.USER_ID, userVo.getId());
-        return Response.SUCCESS();
+        return Response.SUCCESS(userVo);
 
     }
 
