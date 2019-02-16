@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,9 +36,9 @@ public class AnswerController extends BaseController {
             @ApiImplicitParam(name = "answer", value = "答案", paramType = "String"),
             @ApiImplicitParam(name = "subjectType", value = "题目类型", paramType = "String")
     })
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    @PostMapping(value = "/submit",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Interceptor(needLogin = true)
-    public Response<AnswerVo> submit(SubmitAnswerForm submitAnswerForm) {
+    public Response<AnswerVo> submit(@RequestBody SubmitAnswerForm submitAnswerForm) {
         if (submitAnswerForm.getSubjectId() == null || StringUtils.isNullOrEmpty(submitAnswerForm.getAnswer())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
         }
