@@ -8,6 +8,7 @@ import com.tsco.web.config.annotations.Interceptor;
 import com.tsco.web.controller.BaseController;
 import com.tsco.web.domain.Response;
 import com.tsco.web.domain.vo.SubjectVo;
+import com.tsco.web.domain.vo.SubmitAnswerForm;
 import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
 import io.swagger.annotations.Api;
@@ -36,11 +37,11 @@ public class AnswerController extends BaseController {
     })
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @Interceptor(needLogin = true)
-    public Response<AnswerVo> submit(@RequestParam("subjectId") Integer subjectId, @RequestParam("subjectType") String subjectType, @RequestParam("answer") String answer) {
-        if (subjectId == null || StringUtils.isNullOrEmpty(answer) || StringUtils.isNullOrEmpty(subjectType)) {
+    public Response<AnswerVo> submit(SubmitAnswerForm submitAnswerForm) {
+        if (submitAnswerForm.getSubjectId() == null || StringUtils.isNullOrEmpty(submitAnswerForm.getAnswer())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
         }
-        AnswerVo answerVo = answerService.submit(getCurrentUserId(), subjectId, answer);
+        AnswerVo answerVo = answerService.submit(getCurrentUserId(), submitAnswerForm.getSubjectId(), submitAnswerForm.getAnswer());
         return Response.SUCCESS(answerVo);
     }
 
