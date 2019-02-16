@@ -31,4 +31,12 @@ public interface AnswerService {
      * @return 是否正确
      */
     AnswerVo submit(int userId, int subjectId, String result);
+
+    /**
+     * 根据id获取题目信息
+     *
+     * @param subjectId 题目id
+     * @return
+     */
+    Subject getSubjectById(int subjectId);
 }

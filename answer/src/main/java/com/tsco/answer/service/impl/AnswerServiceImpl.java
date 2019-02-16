@@ -57,6 +57,11 @@ public class AnswerServiceImpl implements AnswerService {
                 .build();
     }
 
+    @Override
+    public Subject getSubjectById(int subjectId) {
+        return subjectMapper.load(subjectId);
+    }
+
     private Boolean isCorrectAnswer(Subject subject, String result) {
         switch (subject.getType()) {
             case ALGORITHM:
