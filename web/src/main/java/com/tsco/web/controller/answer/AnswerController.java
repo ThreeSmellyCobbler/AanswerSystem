@@ -14,9 +14,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 @Api(description = "答题相关接口", tags = "answer")
@@ -24,7 +24,7 @@ import java.util.Arrays;
 @RequestMapping("/answer")
 public class AnswerController extends BaseController {
 
-    @Autowired
+    @Resource(name = "answerServiceImpl")
     private AnswerService answerService;
 
 
