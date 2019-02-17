@@ -33,4 +33,7 @@ public class UserVo {
 
     @ApiModelProperty(value = "角色")
     private String userRole;
+
+    @ApiModelProperty(value = "sessionId")
+    private String sessionId;
 }
