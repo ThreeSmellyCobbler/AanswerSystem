@@ -12,6 +12,11 @@ import lombok.NoArgsConstructor;
 public class SubmitAnswerForm {
 
     /**
+     * 用户id
+     */
+    private Integer userId;
+
+    /**
      * 题目id
      */
     Integer subjectId;

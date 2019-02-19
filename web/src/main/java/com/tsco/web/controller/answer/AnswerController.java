@@ -38,13 +38,12 @@ public class AnswerController extends BaseController {
             @ApiImplicitParam(name = "answer", value = "答案", paramType = "String"),
             @ApiImplicitParam(name = "subjectType", value = "题目类型", paramType = "String")
     })
-    @PostMapping(value = "/submit",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @Interceptor(needLogin = true)
+    @PostMapping(value = "/submit", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Response<AnswerVo> submit(@RequestBody SubmitAnswerForm submitAnswerForm) {
-        if (submitAnswerForm.getSubjectId() == null || StringUtils.isNullOrEmpty(submitAnswerForm.getAnswer())) {
+        if (submitAnswerForm.getSubjectId() == null || StringUtils.isNullOrEmpty(submitAnswerForm.getAnswer()) || submitAnswerForm.getUserId() == null) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
         }
-        AnswerVo answerVo = answerService.submit(getCurrentUserId(), submitAnswerForm.getSubjectId(), submitAnswerForm.getAnswer());
+        AnswerVo answerVo = answerService.submit(submitAnswerForm.getUserId(), submitAnswerForm.getSubjectId(), submitAnswerForm.getAnswer());
         return Response.SUCCESS(answerVo);
     }
 

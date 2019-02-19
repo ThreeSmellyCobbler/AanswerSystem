@@ -27,7 +27,6 @@ public abstract class BaseController {
     }
 
     protected int getCurrentUserId() {
-        String sessionId = request.getHeader(Constans.JSESSIONID);
         if (request.getSession().getAttribute(Constans.USER_ID) == null) {
             log.info("need user login");
             throw new WebException(ExceptionCode.UN_AUTHORITY, "需要登录");
