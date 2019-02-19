@@ -1,7 +1,6 @@
 package com.tsco.web.config.Interceptor;
 
 import com.tsco.web.config.annotations.Interceptor;
-import com.tsco.web.utils.Constans;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
