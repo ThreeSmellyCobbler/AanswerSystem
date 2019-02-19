@@ -39,7 +39,7 @@ public class AnswerController extends BaseController {
             @ApiImplicitParam(name = "subjectType", value = "题目类型", paramType = "String")
     })
     @PostMapping(value = "/submit",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @Interceptor(needLogin = true)
+//    @Interceptor(needLogin = true)
     public Response<AnswerVo> submit(@RequestBody SubmitAnswerForm submitAnswerForm) {
         if (submitAnswerForm.getSubjectId() == null || StringUtils.isNullOrEmpty(submitAnswerForm.getAnswer())) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
