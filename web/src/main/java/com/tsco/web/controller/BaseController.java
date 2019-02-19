@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author chen jia
@@ -29,12 +28,11 @@ public abstract class BaseController {
 
     protected int getCurrentUserId() {
         String sessionId = request.getHeader(Constans.JSESSIONID);
-        HttpSession session = request.getSession().getSessionContext().getSession(sessionId);
-        if (session.getAttribute(Constans.USER_ID) == null) {
+        if (request.getSession().getAttribute(Constans.USER_ID) == null) {
             log.info("need user login");
             throw new WebException(ExceptionCode.UN_AUTHORITY, "需要登录");
         }
-        return (int) (long) (session.getAttribute(Constans.USER_ID));
+        return (int) (long) (request.getSession().getAttribute(Constans.USER_ID));
     }
 
 
