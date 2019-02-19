@@ -36,7 +36,6 @@ public class IndexController {
             @ApiImplicitParam(name = "pageSize", value = "页大小,默认每页10条数据", paramType = "Integer")}
     )
     @RequestMapping(value = "/get-subject-list", method = RequestMethod.GET)
-    @Interceptor(needLogin = true)
     public Response<PageVo> getSubjectVo(@RequestParam(value = "pageIndex", defaultValue = "0") Integer pageIndex, @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         log.info("query subject list begin,pageIndex is:{},pageSize is:{}", pageIndex, pageSize);
         int totalSize = answerService.countSubjects();

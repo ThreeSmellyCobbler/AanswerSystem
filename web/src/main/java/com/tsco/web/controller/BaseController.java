@@ -3,16 +3,17 @@ package com.tsco.web.controller;
 import com.tsco.web.exception.ExceptionCode;
 import com.tsco.web.exception.WebException;
 import com.tsco.web.utils.Constans;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author chen jia
  * 需要登录的controller继承此类
  */
+@Slf4j
 public abstract class BaseController {
 
     private HttpServletRequest request;
@@ -26,9 +27,9 @@ public abstract class BaseController {
     }
 
     protected int getCurrentUserId() {
-        String sessionId = request.getHeader(Constans.JESSIONID);
-        HttpSession currentSession = request.getSession().getSessionContext().getSession(sessionId);
-        if (currentSession.getAttribute(Constans.USER_ID) == null) {
+        log.debug("begin submit answer,request head JessionId is:{}", request.getHeaderNames());
+        if (request.getSession().getAttribute(Constans.USER_ID) == null) {
+            log.info("need user login");
             throw new WebException(ExceptionCode.UN_AUTHORITY, "需要登录");
         }
         return (int) (long) (request.getSession().getAttribute(Constans.USER_ID));

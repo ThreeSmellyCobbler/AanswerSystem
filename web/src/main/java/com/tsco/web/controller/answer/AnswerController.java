@@ -15,12 +15,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 
+@Slf4j
 @Api(description = "答题相关接口", tags = "answer")
 @RestController
 @RequestMapping("/answer")
@@ -49,7 +51,6 @@ public class AnswerController extends BaseController {
     @ApiOperation(value = "题目详情", notes = "subject-detail")
     @ApiImplicitParam(name = "id", value = "题目id", paramType = "Integer")
     @GetMapping(value = "/get-subject-detail")
-    @Interceptor(needLogin = true)
     public Response<SubjectVo> getSubjectDetail(@RequestParam("id") Integer subjectId) {
         if (subjectId == null) {
             throw new WebException(ExceptionCode.INVALID_PARAMETER, "参数不能为空");
