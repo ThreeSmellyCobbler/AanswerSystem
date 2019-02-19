@@ -6,5 +6,5 @@ public class Constans {
 
     public static final String VERIFICATION_KEY_PREFIX = "register";
 
-    public static final String JESSIONID = "JESSIONID";
+    public static final String JSESSIONID = "jsessionid";
 }
